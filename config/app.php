@@ -156,6 +156,7 @@ return [
         Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Bican\Roles\RolesServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class
 
     ],
 
@@ -205,6 +206,7 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
 
         /*
