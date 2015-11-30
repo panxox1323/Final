@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="shortcut icon" href="img/favicon.ico">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Cl&iacute;nica Dental Oral Plus</title>
 	<style>
@@ -43,6 +44,9 @@
 	{!! Html::script('dateTimePicker/es.js') !!}
 	{!! Html::script('dateTimePicker/dateTimepicker.js') !!}
 	{!! Html::script('js/formatoMoneda.js') !!}
+	{!! Html::script('js/agendar/agendar.js') !!}
+	{!! Html::script('js/agendar/dao.js') !!}
+	{!! Html::script('js/agendar/init.js') !!}
 	<script language="javascript" type="text/javascript">
 
 		$(document).ready(function () {
@@ -161,7 +165,7 @@
 
 
 			format: ("YYYY MM dd"),
-			minDate: moment(),
+			// minDate: moment(),
 			maxDate: moment("2016-12-31"),
 			disabledDates: [
 				moment(false),
@@ -184,7 +188,7 @@
 				"12/25/2016"
 
 			],
-			daysOfWeekDisabled: [0, 6],
+			// daysOfWeekDisabled: [0, 6],
 
 
 		});

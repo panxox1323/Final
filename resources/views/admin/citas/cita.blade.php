@@ -12,7 +12,7 @@
                         <div class="row ajuste-seleccione">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                 <h4 class="text-center color-subtitulo">Seleccione Especialista</h4>
-                                <select name="id_especialista" id="" class="form-control">
+                                <select name="id_especialista" id="id_especialista" class="form-control">
                                     @foreach($especialista as $esp)
                                         <option value="{{ $esp->id }}" >{{ $esp->first_name.' '.$esp->last_name }}</option>
                                     @endforeach
@@ -55,23 +55,25 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6" >
-                                <h4 class="text-center color-subtitulo">Seleccione una Hora</h4>
-                                <div id="acordion"  class="horario">
-                                    @foreach($listado as $lista)
+                                <h4 class="text-center color-subtitulo">Lista de Horarios</h4>
+                                <ul id="lista_horas" class="lista nav nav-pills nav-stacked"></ul>
+                                {{--<div id="acordion"  class="horario">--}}
+                                    {{--@foreach($listado as $lista)--}}
 
-                                        <h3><span class="icon-chevron-right" style="color: green; font-size: 20px;"></span>  {{ $lista->hora_inicio }}</h3>
+                                        {{--<h3><span class="icon-chevron-right" style="color: green; font-size: 20px;"></span>  {{ $lista->hora_inicio }}</h3>--}}
 
-                                        <div>
-                                            <p class="text-green"></p>
-                                        </div>
-                                    @endforeach
-                                </div>
+                                        {{--<div>--}}
+                                            {{--<p class="text-green"></p>--}}
+                                        {{--</div>--}}
+                                    {{--@endforeach--}}
+                                {{--</div>--}}
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                <select name="hora" class="form-control">
-                                    @foreach($disponibles as $disponible)
-                                        <option value="{{ $disponible->id }}">{{$disponible->hora }}</option>
-                                    @endforeach
+                                <select id="select_horas" name="hora" class="form-control">
+                                    <option value="">Desplegar para ver horas disponibles</option>
+                                    {{--@foreach($disponibles as $disponible)--}}
+                                        {{--<option value="{{ $disponible->id }}">{{$disponible->hora }}</option>--}}
+                                    {{--@endforeach--}}
                                 </select>
                                 <button type="submit" onclick="funcionAgendar()" class="btn btn-info btn-block btn-lg "><span class="icon-calendar"></span></span> <strong>Agendar</strong></button>
                             </div>

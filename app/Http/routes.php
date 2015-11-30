@@ -102,6 +102,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => '\Ad
 
     ]);
 
+    Route::get('getdays/{id}/{fecha}', 'AgendarController@obtenerHorasAsignadasPDia');
+
 
 
 });
