@@ -8,9 +8,9 @@
     </tr>
     @foreach($tratamientos as $tratamiento)
         <tr data-id="{{ $tratamiento->id }}">
-            <td class="text-center">{{ $tratamiento->nombre_tratamiento }}</td>
-            <td class="text-center">$ {{ number_format($tratamiento->valor_tratamiento) }}</td>
-            <td class="text-center">{{ $tratamiento->duracion}} Sesiones</td>
+            <td class="text-center">{{ $tratamiento->nombre }}</td>
+            <td class="text-center">$ {{ number_format($tratamiento->valor) }}</td>
+            <td class="text-center">{{ $tratamiento->sesiones}} Sesiones</td>
             <td class="text-center">
                 <a href="{{ route('admin.tratamiento.edit', $tratamiento) }}" class="btn btn-success btn-xs" title="Editar tratamiento" target=""><span class="icon-pencil2"></span></a>
 

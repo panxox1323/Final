@@ -4,6 +4,7 @@ namespace Oral_Plus\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Oral_Plus\Consulta;
@@ -21,9 +22,11 @@ class PagarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.pagar.index');
+        $pagos = Pagos::name($request->get('name'))->orderBy('created_at', 'desc')->paginate(8);
+
+        return view('admin.pagos.index', compact('pagos'));
     }
 
     /**
@@ -33,7 +36,9 @@ class PagarController extends Controller
      */
     public function create()
     {
-        return view('admin.pagar.create');
+        $pacientes = User::where('type', '!=','Especialista')->orderBy('first_name', 'asc')->get(['first_name', 'last_name', 'id']);
+
+        return view('admin.pagos.create', compact('pacientes'));
     }
 
     /**
@@ -42,14 +47,37 @@ class PagarController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Requests\CreatePagoRequest $request)
+    public function store(Requests\CreatePagos2Request $request)
     {
+        $pago = new Pagos($request->all());
 
-        $pago = Pagos::create($request->all());
 
-        $message = 'Pago efectuado de: '. $pago->monto . ' al usuario: '. $pago->user->first_name. ' '. $pago->user->last_name;
-        Session::flash('message', $message);
-        return Redirect::route('admin.users.index');
+        $usuario = User::findOrFail($pago->user_id);
+
+
+        if($usuario->saldo >0 && $pago->monto<=$usuario->saldo)
+        {
+
+            $saldo = $usuario->saldo;
+            $saldo2 =$usuario->saldo = $saldo - $pago->monto;
+            DB::table('users')
+                ->where('id', $usuario->id)
+                ->update(['saldo' => $saldo2]);
+            $pago = Pagos::create($request->all());
+
+            $message = 'El Paciente '. $usuario->first_name .' '. $usuario->last_name . ' pago un total de: '.'$'. number_format($pago->monto);
+            Session::flash('message', $message);
+            return Redirect::route('admin.pagar.index');
+        }
+        else
+        {
+            $message =  $usuario->first_name . ' '. $usuario->last_name . ' no registra deuda en el sistema o el monto de ' . '$'. number_format($pago->monto) .' que se quiere pagar es superior al saldo: '.'$'. number_format($usuario->saldo);
+            Session::flash('message', $message);
+
+            return Redirect::route('admin.users.index');
+
+
+        }
 
     }
 
@@ -61,10 +89,7 @@ class PagarController extends Controller
      */
     public function show($id)
     {
-        $consultas = Consulta::where('id_usuario', $id)->get();
-        $pagos     = Pagos::where('user_id', $id)->get();
-        $usuario = User::findOrFail($id);
-        return view('admin.pagar.index', compact('usuario', 'consultas', 'pagos'));
+        return 'ok';
     }
 
     /**
@@ -75,9 +100,10 @@ class PagarController extends Controller
      */
     public function edit($id)
     {
-        $usuario = User::findOrFail($id);
+        $pagos = Pagos::findOrFail($id);
+        $pacientes = User::where('type', '!=','Especialista')->orderBy('first_name', 'asc')->get(['first_name', 'last_name', 'id']);
 
-        return view('admin.pagar.create', compact('usuario'));
+        return view('admin.pagos.edit', compact('pagos', 'pacientes'));
 
     }
 
@@ -103,4 +129,7 @@ class PagarController extends Controller
     {
         return 'ok';
     }
+
+
+
 }

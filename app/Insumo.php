@@ -8,7 +8,7 @@ class Insumo extends Model
 {
     protected $table = 'insumos';
 
-    protected $fillable = ['nombre', 'precio_unitario', 'descripcion'];
+    protected $fillable = ['nombre', 'precio_unitario', 'vencimiento', 'stock', 'descripcion'];
 
 
     public function detalle_compra()

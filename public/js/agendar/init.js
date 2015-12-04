@@ -24,7 +24,7 @@ $(function($) {
             $.each(response.horas_todas, function(i, value) {
                 console.log(value);
                 var li = $('<li/>');
-                (value.active == 1) ? li.append(value.hora + ' - <b>Reservada</b> '): li.append(value.hora + ' - <b>Libre</b> ');
+                (value.active == 1) ? li.append(value.hora + ' - <b class="color-b">Reservada</b> '): li.append(value.hora + ' - <b class="color-b2">Libre</b> ');
                 li.appendTo(element);
             });
             var element = $('#select_horas');

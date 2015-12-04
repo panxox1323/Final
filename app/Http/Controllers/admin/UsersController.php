@@ -41,8 +41,7 @@ class UsersController extends Controller
     {
         $users = User::name($request->get('name'))->type($request->get('type'))->orderBy('id', 'DESC')->paginate(8);
 
-        $selected = array();
-        return view('admin.users.index', compact('users', 'selected'));
+        return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -57,9 +56,6 @@ class UsersController extends Controller
 
         return View('admin.users.create', compact('especialidades'));
     }
-
-
-
 
 
 
@@ -153,6 +149,11 @@ class UsersController extends Controller
     }
 
     public function pagar()
+    {
+        return 'ok';
+    }
+
+    public function diagnostico()
     {
         return 'ok';
     }

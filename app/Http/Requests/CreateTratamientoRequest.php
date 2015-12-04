@@ -24,8 +24,8 @@ class CreateTratamientoRequest extends Request
     public function rules()
     {
         return [
-            'nombre_tratamiento'    => 'required|unique:tratamientos',
-            'valor_tratamiento'     => 'required'
+            'nombre'    => 'required|unique:tratamientos',
+            'valor'     => 'required'
         ];
     }
 }

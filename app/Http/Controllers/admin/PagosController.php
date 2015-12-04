@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Oral_Plus\Consulta;
+use Oral_Plus\Horas_agendadas;
 use Oral_Plus\Http\Requests;
 use Oral_Plus\Http\Controllers\Controller;
 use Oral_Plus\Pagos;
@@ -69,7 +70,7 @@ class PagosController extends Controller
      */
     public function edit($id)
     {
-        //
+       return 'ok';
     }
 
     /**
@@ -97,9 +98,10 @@ class PagosController extends Controller
 
     public function pagos($id)
     {
-        $consultas = Consulta::where('id_usuario', $id)->get();
+        $consultas = Horas_agendadas::where('id_usuario', $id)->groupBy('fecha', 'id_horas')->orderBy('fecha', 'asc')->get();
         $pagos     = Pagos::where('user_id', $id)->orderBy('fecha', 'desc')->get();
         $usuario =   User::findOrFail($id);
+
 
         return view('admin.pagar.index', compact('usuario', 'consultas', 'pagos'));
     }
@@ -130,7 +132,7 @@ class PagosController extends Controller
 
             $message = 'El Paciente '. $usuario->first_name .' '. $usuario->last_name . ' pago un total de: '.'$'. number_format($pago->monto);
             Session::flash('message', $message);
-            return Redirect::route('admin.users.index');
+            return Redirect::route('admin.pagar.index');
         }
         else
         {

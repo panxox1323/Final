@@ -61,7 +61,7 @@ class User extends Model implements AuthenticatableContract,
 
     public function horas_agendadas()
     {
-        return $this->hasMany('Oral_Plus\Horas');
+        return $this->hasMany('Oral_Plus\Horas_agendadas');
     }
 
 

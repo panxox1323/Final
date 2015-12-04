@@ -45,7 +45,7 @@ class TratamientoController extends Controller
     {
         $tratamiento = Tratamiento::create($request->all());
 
-        $message = $tratamiento->nombre_tratamiento  . ' fue creado correctamente';
+        $message = $tratamiento->nombre  . ' fue creado correctamente';
         Session::flash('message', $message);
         return Redirect::route('admin.tratamiento.index');
 

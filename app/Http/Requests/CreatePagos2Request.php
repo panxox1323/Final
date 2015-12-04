@@ -4,7 +4,7 @@ namespace Oral_Plus\Http\Requests;
 
 use Oral_Plus\Http\Requests\Request;
 
-class CreateHora_Request extends Request
+class CreatePagos2Request extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,8 @@ class CreateHora_Request extends Request
     public function rules()
     {
         return [
-
-            'hora'   => 'required|unique:horas',
-
-
+            'user_id'    => 'required|numeric',
+            'monto'      => 'required|numeric'
         ];
     }
 }

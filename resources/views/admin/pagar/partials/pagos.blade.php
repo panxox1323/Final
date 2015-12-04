@@ -17,7 +17,7 @@
             @if($usuario->type == 'admin')
 
                 <td class="text-center">
-                    <a href="" class="btn btn-success btn-xs" title="Editar Pago"><span class="icon-pencil2"></span></a>
+                    <a href="{{ route('admin.pagar.edit', $pagos) }}" class="btn btn-success btn-xs" title="Editar usuario" target=""><span class="icon-pencil2"></span></a>
                 </td>
 
             @endif

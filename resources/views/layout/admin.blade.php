@@ -84,8 +84,7 @@
 
 	</div>
 
-
-
+	@yield('script')
 
 	<script type="text/javascript">
 	$('#type').change(function(){
@@ -165,7 +164,7 @@
 
 
 			format: ("YYYY MM dd"),
-			// minDate: moment(),
+
 			maxDate: moment("2016-12-31"),
 			disabledDates: [
 				moment(false),
@@ -188,7 +187,7 @@
 				"12/25/2016"
 
 			],
-			// daysOfWeekDisabled: [0, 6],
+			 daysOfWeekDisabled: [0, 6],
 
 
 		});

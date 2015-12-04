@@ -8,12 +8,12 @@ class Detalle_Insumo extends Model
 {
     protected $fila = 'detalle_insumos';
 
-    protected $fillable = ['id_intervencion', 'id_insumo', 'cantidad', 'fecha'];
+    protected $fillable = ['id_tratamiento', 'id_insumo', 'cantidad', 'valor'];
 
 
-    public function detalle_consulta()
+    public function tratamiento()
     {
-        return $this->belongsTo('Oral_Plus/Detalle_consulta');
+        return $this->belongsTo('Oral_Plus/Tratamientos', 'id_tratamiento', 'id');
     }
 
     public function insumo()

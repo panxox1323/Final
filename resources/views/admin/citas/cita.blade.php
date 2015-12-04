@@ -11,7 +11,6 @@
                     {!! Form::open(['route' => 'admin.agendar.store', 'method' => 'POST', 'id' => 'form', 'role' => 'form', 'autocomplete' => 'off']) !!}
                         <div class="row ajuste-seleccione">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                <h4 class="text-center color-subtitulo">Seleccione Especialista</h4>
                                 <select name="id_especialista" id="id_especialista" class="form-control">
                                     @foreach($especialista as $esp)
                                         <option value="{{ $esp->id }}" >{{ $esp->first_name.' '.$esp->last_name }}</option>
@@ -20,19 +19,15 @@
                             </div>
 
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 ">
-                                <h4 class="text-center color-subtitulo">Seleccione un Paciente</h4>
 
                                 <select name="id_usuario" class="form-control">
+                                    <option value="">Seleccione Paciente</option>
                                     @foreach($paciente as $pac)
                                         <option value="{{ $pac->id }}">{{ $pac->first_name.' '.$pac->last_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
 
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 ">
-                                <h4 class="text-center color-subtitulo">Valor de la Consulta</h4>
-                                {!! Form::select('valor_consulta', config('opciones.valoresConsulta'),null, ['class' => 'form-control', 'id' => 'selector'] ) !!}
-                            </div>
                         </div>
                         <div class="row ajuste11">
                             <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
@@ -43,7 +38,7 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div id="datetimepicker12"></div>
-                                                {!! Form::text('fecha', null, ['class' => '', 'id' => 'fechaOculta']) !!}
+                                                {!! Form::text('fecha', null, ['class' => 'oculta', 'id' => 'fechaOculta']) !!}
                                                 @if($errors->all())
                                                     <div class="" role="alert">
                                                         <strong><p class="porte2 pull-right">{{ $errors->first('fecha') }}</p></strong>
@@ -54,28 +49,21 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6" >
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                 <h4 class="text-center color-subtitulo">Lista de Horarios</h4>
-                                <ul id="lista_horas" class="lista nav nav-pills nav-stacked"></ul>
-                                {{--<div id="acordion"  class="horario">--}}
-                                    {{--@foreach($listado as $lista)--}}
+                                <ul id="lista_horas" class="lista scroll-pool">
 
-                                        {{--<h3><span class="icon-chevron-right" style="color: green; font-size: 20px;"></span>  {{ $lista->hora_inicio }}</h3>--}}
+                                </ul>
 
-                                        {{--<div>--}}
-                                            {{--<p class="text-green"></p>--}}
-                                        {{--</div>--}}
-                                    {{--@endforeach--}}
-                                {{--</div>--}}
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                <select id="select_horas" name="hora" class="form-control">
+                                <select id="select_horas" name="id_horas" class="form-control">
                                     <option value="">Desplegar para ver horas disponibles</option>
                                     {{--@foreach($disponibles as $disponible)--}}
                                         {{--<option value="{{ $disponible->id }}">{{$disponible->hora }}</option>--}}
                                     {{--@endforeach--}}
                                 </select>
-                                <button type="submit" onclick="funcionAgendar()" class="btn btn-info btn-block btn-lg "><span class="icon-calendar"></span></span> <strong>Agendar</strong></button>
+                                <button type="submit" class="btn btn-info btn-block btn-lg "><span class="icon-calendar"></span></span> <strong>Agendar</strong></button>
                             </div>
                         </div>
 

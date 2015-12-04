@@ -25,8 +25,7 @@ class CreateCitaRequest extends Request
     {
         return [
             'fecha'            => 'required|date',
-            'hora'             => 'required',
-            'valor_consulta'   => 'required|numeric',
+            'id_horas'         => 'required',
             'id_usuario'       => 'required',
             'id_especialista'  => 'required'
         ];
