@@ -5,9 +5,12 @@ namespace Oral_Plus\Http\Controllers\admin;
 use DB;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Oral_Plus\Consulta;
 use Oral_Plus\Hora;
 use Oral_Plus\Horas_agendadas as HorasAgendadas;
+use Oral_Plus\Horas_agendadas;
 use Oral_Plus\Http\Requests;
 use Oral_Plus\Http\Controllers\Controller;
 use Oral_Plus\Listado_horas;
@@ -50,8 +53,12 @@ class AgendarController extends Controller
      */
     public function store(Requests\CreateCitaRequest $request)
     {
-        $datos = new Consulta($request->all());
-        dd($datos);
+        $datos = HorasAgendadas::create($request->all());
+
+        $message = 'Hora agendada por: '. $datos->userUsuario->first_name. ' ' .$datos->userUsuario->last_name. ' para el día:'. $datos->fecha. ' y a la hora: ' . date("H:i", $qwerty=strtotime($datos->obtenerHora->hora));
+
+        Session::flash('message', $message);
+        return Redirect::route('horas-agendadas');
     }
 
     /**
@@ -94,10 +101,35 @@ class AgendarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        /** $hora = Horas_agendadas::findOrFail($id);
+        $hora->delete();
+
+        $message = 'La hora que estaba agendada a las '.date("H:i", $cons=strtotime($hora->obtenerHora->hora)).' para la fecha '. $hora->fecha.' del paciente '. $hora->userUsuario->first_name.' '. $hora->userUsuario->last_name.' fue eliminado correctamente';
+        Session::flash('message', $message);
+         *
+         */
+        
+        $hora = Horas_agendadas::findOrFail($id);
+        $hora->delete();
+        $message = 'La hora'. date("H:i", $str=strtotime($hora->obtenerHora->hora)).' del paciente '.$hora->userUsuario->first_name. $hora->userUsuario->last_name. ' fue eliminado de nuestros registros';
+        if($request->ajax())
+        {
+            return response()->json([
+
+                'id'      => $hora->id,
+                'message' => $message,
+
+
+            ]);
+        }
+
+        Session::flash('message', $message);
+        return redirect()->route('horas-agendadas');
+
     }
+
 
     /**
      * Funcion para regenerar el arreglo de las citas asignadas a un arreglo valido
@@ -180,5 +212,26 @@ class AgendarController extends Controller
         );
 
     }
+
+    public function ver_horas(Request $request)
+    {
+        $horas = Horas_agendadas::name($request->get('name'))
+                    ->groupBy('fecha', 'id_horas')
+                    ->orderBy('fecha', 'desc')
+                    ->paginate(8);
+
+        return view('admin.citas.index', compact('horas'));
+    }
+
+    public function editar_cita()
+    {
+        $listado      = Hora::orderBy('hora', 'asc')->get();
+        $especialista = User::where('type', 'Especialista')->get(['first_name', 'last_name', 'id']);
+        $paciente     = User::where('type', '!=', 'Especialista')->get(['first_name', 'last_name', 'id']);
+        $disponibles  = Hora::orderBy('hora', 'asc')->get();
+
+        return view('admin.citas.edit', compact('listado', 'especialista', 'paciente', 'disponibles'));
+    }
+
 
 }

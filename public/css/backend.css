@@ -4303,7 +4303,7 @@ tbody.collapse.in {
 
 .ajuste11
 {
-  margin-top: 1%;
+  margin-top: 3%;
 }
 
 .ajuste-seleccione
@@ -8414,7 +8414,7 @@ a:hover, a:active, a:focus {
 
 .ajuste4
 {
-  top: 10%;
+  top: 1%;
 }
 
 
@@ -12087,8 +12087,34 @@ table.text-center, table.text-center td, table.text-center th {
 
 .lista li {
   padding: 5px 10px;
-  background: #1A8DC3;
+  background: #719DE4;
   margin-bottom: 5px;
   color: #fff;
   border-radius: 2px;
+}
+
+.ajuste-5000
+{
+  margin-left: 120px;
+}
+
+.scroll-pool
+{
+  max-height: 400px;
+  overflow: scroll;
+}
+
+.color-b
+{
+  color: #F04F4F;
+}
+
+.color-b2
+{
+  color: green;
+}
+
+.oculta
+{
+  display: none;
 }

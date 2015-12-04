@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
 
             $table->boolean('estado')->default(1);
 
-            $table->integer('id_especialidad')->unsigned();
+            $table->integer('id_especialidad')->unsigned()->nullable();
             $table->foreign('id_especialidad')
                 ->references('id')
                 ->on('especialidades')

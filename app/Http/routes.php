@@ -60,6 +60,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => '\Ad
     Route::get('especialidad',       'EspecialidadController@guardar');
 
     Route::get('agendar/{date}',     'AgendarController@index');
+    Route::get('editar-cita', [
+        'as'     => 'editar-cita',
+        'uses'   => 'AgendarController@editar_cita'
+    ]);
+    Route::get('horas-agendadas', [
+        'as'     => 'horas-agendadas',
+        'uses'   => 'AgendarController@ver_horas'
+    ]);
     Route::resource('agendar',        'AgendarController');
     Route::resource('consultas',     'ConsultasController');
     Route::resource('historial',     'IntervencionController');
@@ -69,11 +77,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => '\Ad
     Route::resource('intervencion2', 'Intervencion2Controller');
     Route::resource('tratamiento',   'TratamientoController');
 
-    Route::resource('pagar',  'PagosController');
+    Route::resource('pagar',  'PagarController');
     Route::resource('configurar-forma-de-pago', 'FormaPagoController');
 
 
     Route::resource('configurar', 'ConfigurarController');
+
+    Route::resource('diagnostico', 'DiagnosticoController');
 
     Route::get('/pagos/{id}',  [
 

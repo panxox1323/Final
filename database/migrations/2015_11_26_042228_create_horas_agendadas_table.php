@@ -20,10 +20,20 @@ class CreateHorasAgendadasTable extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
+            $table->integer('id_usuario')->unsigned();
+            $table->foreign('id_usuario')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
             $table->integer('id_horas')->unsigned();
             $table->foreign('id_horas')
                 ->references('id')
                 ->on('horas')
+                ->onDelete('cascade');
+            $table->integer('id_det_diagnostico')->unsigned()->nullable();
+            $table->foreign('id_det_diagnostico')
+                ->references('id')
+                ->on('detalle_diagnostico')
                 ->onDelete('cascade');
             $table->date('fecha');
             $table->time('hora');

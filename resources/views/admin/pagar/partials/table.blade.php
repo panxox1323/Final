@@ -3,17 +3,13 @@
     <tr class="info">
         <th class="text-center">D&iacute;a</th>
         <th class="text-center">Hora</th>
-        <th class="text-center">Estado</th>
         <th class="text-center">Especialista</th>
-        <th class="text-center">Valor</th>
     </tr>
     @foreach($consultas as $consulta)
         <tr data-id="{{ $consulta->id }}">
             <td class="text-center">{{ $consulta->fecha }}</td>
-            <td class="text-center">{{ $consulta->hora }}</td>
-            <td class="text-center">{{ $consulta->estado}}</td>
-            <td class="text-center">{{ $consulta->user->first_name }} {!! $consulta->user->last_name !!}</td>
-            <td class="text-center">${{ number_format($consulta->valor_consulta)  }}</td>
+            <td class="text-center">{{ date("H:i",$hora=strtotime($consulta->obtenerHora->hora)) }}</td>
+            <td class="text-center">{{ $consulta->userEspecialista->first_name }} {{ $consulta->userEspecialista->last_name }}</td>
         </tr>
     @endforeach
 </table>

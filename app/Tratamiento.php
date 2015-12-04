@@ -8,12 +8,17 @@ class Tratamiento extends Model
 {
     protected $table = 'tratamientos';
 
-    protected $fillable = ['nombre_tratamiento', 'valor_tratamiento', 'duracion'];
+    protected $fillable = ['nombre', 'valor', 'sesiones'];
 
 
-    public function detalle_consulta()
+    public function detalle_diagnostico()
     {
-        return $this->hasMany('Oral_Plus\Detalle_consulta');
+        return $this->hasMany('Oral_Plus\Detalle_diagnostico');
+    }
+
+    public function detalle_insumos()
+    {
+        return $this->hasMany('Oral_Plus\Detalle_Insumo');
     }
 
 
@@ -24,7 +29,7 @@ class Tratamiento extends Model
     {
         if(trim($nombre) != "")
         {
-            $query->where('nombre_tratamiento', 'LIKE', "%$nombre%");
+            $query->where('nombre', 'LIKE', "%$nombre%");
         }
     }
 }

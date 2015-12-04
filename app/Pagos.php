@@ -14,4 +14,12 @@ class Pagos extends Model
     {
         return $this->belongsTo('Oral_Plus\User','user_id', 'id');
     }
+
+    public function scopeName($query, $name)
+    {
+        if(trim($name) != "")
+        {
+            $query->where("user_id",  $name);
+        }
+    }
 }

@@ -2,28 +2,27 @@
 
 namespace Oral_Plus\Http\Controllers\admin;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-use Oral_Plus\Consulta;
-use Oral_Plus\Horas_agendadas;
+use Oral_Plus\Detalle_diagnostico;
+use Oral_Plus\Diagnostico;
 use Oral_Plus\Http\Requests;
 use Oral_Plus\Http\Controllers\Controller;
+use Oral_Plus\Tratamiento;
+use Oral_Plus\User;
 
-class AdminController extends Controller
+class DiagnosticoController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $requests)
     {
-        $fecha = Carbon::now()->format('Y-m-d');
-        $consultas = Horas_agendadas::where('fecha', '=', $fecha)
-                    ->orderBy('id_horas', 'asc')
-                    ->get();
-        return view('admin.index', compact('consultas'));
+        $diagnosticos = Diagnostico::name($requests->get('id_usuario'))->orderBy('created_at', 'asc')->paginate(8);
+
+        return view('admin.diagnostico.index', compact('diagnosticos'));
     }
 
     /**
@@ -33,7 +32,11 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        $pacientes     = User::where('type','!=', 'Especialista')->get(['first_name', 'last_name', 'id']);
+        $especialistas = User::where('type', 'Especialista')->get(['first_name', 'last_name', 'id']);
+        $tratamientos  = Tratamiento::all();
+
+        return view('admin.diagnostico.create', compact('pacientes', 'especialistas', 'tratamientos'));
     }
 
     /**
@@ -44,7 +47,9 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $diagnostico = new Diagnostico($request->all());
+        $detalle_diagnostico = new Detalle_diagnostico($request->all());
+        dd($diagnostico, $detalle_diagnostico);
     }
 
     /**

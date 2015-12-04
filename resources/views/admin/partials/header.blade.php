@@ -13,15 +13,47 @@
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="header-posicion"><a href="{{ route('admin.userPerfil.index') }}" class="pull-right"><span class="icon-profile4"></span><strong> Perfil de {{ Auth::user()->first_name.' '.Auth::user()->last_name }}</strong></a></li>
+            <ul class="nav navbar-nav ">
+                <li class="ajuste-5000"><a href="{{ route('admin.userPerfil.index') }}" class="pull-right"><span class="icon-profile4"></span><strong> Perfil de {{ Auth::user()->first_name.' '.Auth::user()->last_name }}</strong></a></li>
+                <li role="presentation" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <strong><span class="icon-cogs"></span> Configurar</strong> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{!! route('admin.configurar.index') !!}"><span class="icon-alarm"></span><strong> Horas</strong></a></li>
+                        <li><a href="{!! route('admin.configurar-forma-de-pago.index') !!}"><span class="icon-moneybag"><strong> Forma de Pagos</strong> </span></a></li>
+                    </ul>
+
+                </li>
+                <li role="presentation" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <strong><span class="icon-clipboard2"></span> Reportes</strong> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{!! route('admin.pdf-usuarios.index') !!}"><span class="icon-user"></span><strong> Usuarios</strong></a></li>
+                        <li><a href="{!! route('admin.pdf-proveedores.index') !!}"><span class="icon-user-tie"><strong> Proveedores</strong> </span></a></li>
+                        <li><a href=""><span class="icon-aid-kit"><strong> Tratamientos</strong></span></a></li>
+                        <li><a href=""><span class="icon-coins"><strong> Pagos </strong></span></a></li>
+                    </ul>
+
+                </li>
+
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
 
-                <li><a href="/auth/logout"><span class="icon-enter"></span><strong> Cerrar Sesi&oacute;n</strong></a></li>
+                <li role="presentation" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <strong>Cuenta</strong> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/auth/logout"><span class="icon-enter"></span><strong> Cerrar Sesi&oacute;n</strong></a></li>
+                    </ul>
+                </li>
 
             </ul>
+
         </div>
+
     </div>
 </nav>

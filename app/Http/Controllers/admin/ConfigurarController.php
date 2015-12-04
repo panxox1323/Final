@@ -4,6 +4,7 @@ namespace Oral_Plus\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 
+use Oral_Plus\Hora;
 use Oral_Plus\Horas;
 use Oral_Plus\Horas_agendadas;
 use Oral_Plus\Http\Requests;
@@ -19,7 +20,7 @@ class ConfigurarController extends Controller
      */
     public function index()
     {
-        $horas = Horas_agendadas::orderBy('hora', 'asc')->paginate(8);
+        $horas = Horas::orderBy('hora', 'asc')->paginate(8);
 
         return view('admin.config.horas.index', compact('horas'));
     }
@@ -42,8 +43,8 @@ class ConfigurarController extends Controller
      */
     public function store(Requests\CreateHora_Request $request)
     {
-        return 'ok';
-        $hora = Horas_agendadas::create($request->all());
+        $hora = Horas::create($request->all());
+
 
         return redirect()->route('admin.configurar.index');
 

@@ -3,32 +3,24 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDetalleInsumosTable extends Migration
+class CreateDetalleDiagnosticoTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('detalle_insumos', function(Blueprint $table)
+        Schema::create('detalle_diagnostico', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->integer('id_insumo')->unsigned();
-            $table->foreign('id_insumo')
+            $table->integer('id_diagnostico')->unsigned();
+            $table->foreign('id_diagnostico')
                 ->references('id')
-                ->on('insumos')
+                ->on('diagnosticos')
                 ->onDelete('cascade');
             $table->integer('id_tratamiento')->unsigned();
             $table->foreign('id_tratamiento')
                 ->references('id')
                 ->on('tratamientos')
                 ->onDelete('cascade');
-            $table->integer('cantidad');
-            $table->integer('valor');
-
-
+            $table->enum('estado', ['pendiente', 'relizada']);
             $table->timestamps();
         });
     }
@@ -40,6 +32,7 @@ class CreateDetalleInsumosTable extends Migration
      */
     public function down()
     {
-        Schema::drop('detalle_insumos');
+        Schema::drop('detalle_diagnostico');
     }
+
 }

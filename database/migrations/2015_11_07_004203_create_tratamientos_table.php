@@ -15,10 +15,10 @@ class CreateTratamientosTable extends Migration
         Schema::create('tratamientos', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->string('nombre_tratamiento');
+            $table->string('nombre');
             $table->date('fecha_inicio');
-            $table->integer('valor_tratamiento');
-            $table->string('duracion');
+            $table->integer('valor');
+            $table->string('sesiones');
             $table->timestamps();
         });
     }

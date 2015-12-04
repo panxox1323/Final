@@ -15,12 +15,22 @@
                     <li class="icono"><a href="{!! route('admin.users.create') !!}"><span class="icon-add-user"></span> Crear Usuario</a></li>
                 </ul>
             </li>
-            <li class="{{ Active::pattern('admin/especialistas') }} prueba treeview">
+            <li class="{{ Active::pattern('admin/diagnostico') }} prueba treeview">
                 <a href="#">
-                    <span class="icon-health"> Especialistas</span>
+                    <span class="icon-health"> Diagnósticos</span>
                 </a>
                 <ul class="treeview-menu" style="display: none;">
-                    <li class="icono"><a href="{!! route('admin.especialistas.index')!!}"><span class="icon-chevron-thin-right"></span> Ir a Especialistas</a></li>
+                    <li class="icono"><a href="{!! route('admin.diagnostico.index')!!}"><span class="icon-chevron-thin-right"></span> Ir a Diagnósticos</a></li>
+                    <li class="icono"><a href="{!! route('admin.diagnostico.create')!!}"><span class="icon-plus"></span> Ingresar Diagnósticos</a></li>
+                </ul>
+            </li>
+            <li class="{{ Active::pattern('admin/pagos') }} prueba treeview">
+                <a href="#" class="icono">
+                    <span class="icon-clipboard"> Pagos</span>
+                </a>
+                <ul class="treeview-menu" style="display: none;">
+                    <li class="icono"><a href="{!! route('admin.pagar.index')!!}"><span class="icon-chevron-thin-right"></span> Ir a Pagos</a></li>
+                    <li class="icono"><a href="{!! route('admin.pagar.create') !!}"><span class="icon-circle-with-plus"></span> Ingresar Pago</a></li>
                 </ul>
             </li>
             <li class="{{ Active::pattern('admin/insumos')}} prueba treeview">
@@ -74,50 +84,10 @@
                 </a>
                 <ul class="treeview-menu" style="display: none;">
                     <li class="icono"><a href="/admin/agendar/{{ Carbon\Carbon::now()->toDateString()}}"><span class="icon-chevron-thin-right"></span> Agendar Cita</a></li>
-                    <li class="icono"><a href="{!! route('admin.intervencion.index') !!}"><span class="icon-chevron-thin-right"></span> Agregar Intervenci&oacute;n</a></li>
+                    <li class="icono"><a href="{!! route('horas-agendadas') !!}"><span class="icon-chevron-thin-right"></span> Horas Agendadas</a></li>
                 </ul>
             </li>
-            <li class="{{ Active::pattern('admin/historial') }} prueba treeview">
-                <a href="#">
-                    <span class="icon-magic-wand"> Configurar</span>
-                </a>
-                <ul class="treeview-menu" style="display: none;">
-                    <li class="icono"><a href="{!! route('admin.configurar.index') !!}"><span class="icon-chevron-thin-right"></span> Horas</a></li>
-                    <li class="icono"><a href="{!! route('admin.configurar-forma-de-pago.index') !!}"><span class="icon-circle-with-plus"></span> Forma de Pago</a></li>
-                </ul>
-            </li>
-            
-            <li class="{{ Active::pattern('admin/pdf') }} prueba treeview">
-                <a href="#">
-                    <span class="icon-clipboard2"> Reportes</span>
-                </a>
-                <ul class="treeview-menu" style="display: none;">
-                    <li class="">
-                        <a href="#">
-                            <span class="icon-user"> Usuarios</span>
-                        </a>
-                        <ul class="treeview-menu" style="display: none;">
-                            <li class="icono"><a href="{!! route('admin.pdf-usuarios.index') !!}"><span class="icon-eye"></span> Ver Documento</a></li>
-                        </ul>
-                    </li>
-                    <li class="">
-                        <a href="#">
-                            <span class="icon-user-tie"> Proveedores</span>
-                        </a>
-                        <ul class="treeview-menu" style="display: none;">
-                            <li class="icono"><a href="{!! route('admin.pdf-proveedores.index') !!}"><span class="icon-eye"></span> Ver Documento</a></li>
-                        </ul>
-                    </li>
-                    <li class="">
-                        <a href="#">
-                            <span class="icon-lab"> Insumos</span>
-                        </a>
-                        <ul class="treeview-menu" style="display: none;">
-                            <li class="icono"><a href="{!! route('admin.pdf-insumos.index') !!}" target="_blank"><span class="icon-eye"></span> Ver Documento</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
+
 
         </ul><!-- /.sidebar-menu -->
     </section>
